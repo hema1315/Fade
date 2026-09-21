@@ -116,7 +116,9 @@ export default function BookingPage({ user, profile }) {
       <section id="booking">
         <div className="section-header">
           <h2>Reserve Your Slot</h2>
-          <p className="section-desc">Select your preferred date and available hour below.</p>
+          <p className="section-desc">
+            Select your preferred date and available hour below.
+          </p>
         </div>
 
         <label className="field-label">Select Date</label>
@@ -169,7 +171,7 @@ export default function BookingPage({ user, profile }) {
         <div className="section-header">
           <h2>Upcoming Bookings</h2>
         </div>
-        
+
         {myBookings.length === 0 && (
           <div className="empty-state">
             <p>You have no active appointments booked yet.</p>
@@ -177,17 +179,30 @@ export default function BookingPage({ user, profile }) {
         )}
 
         {myBookings.map((b) => (
-          <div className="booking-row" key={b.id}>
+          <div className="booking-row booking-receipt" key={b.id}>
             <div className="info">
-              <div className="booking-date">
-                <strong>{b.booking_date}</strong> at <strong>{b.booking_time}</strong>
+              <div className="receipt-header">
+                <span className="booking-tag">Confirmed</span>
               </div>
-              <span className="booking-tag">Confirmed</span>
+
+              <div className="receipt-name">{b.name}</div>
+
+              <div className="receipt-grid">
+                <div>
+                  <span className="receipt-label">Phone</span>
+                  <span className="receipt-value">{b.phone}</span>
+                </div>
+                <div>
+                  <span className="receipt-label">Date</span>
+                  <span className="receipt-value">{b.booking_date}</span>
+                </div>
+                <div>
+                  <span className="receipt-label">Time</span>
+                  <span className="receipt-value">{b.booking_time}</span>
+                </div>
+              </div>
             </div>
-            <button
-              className="cancel-btn"
-              onClick={() => cancelBooking(b.id)}
-            >
+            <button className="cancel-btn" onClick={() => cancelBooking(b.id)}>
               Cancel
             </button>
           </div>
